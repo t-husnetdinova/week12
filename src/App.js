@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import MovieHeader from './components/movieheader';
+import MovieList from './components/movielist';
+import Movie from './components/movie';
+import {HashRouter,Route} from 'react-router-dom';
+
+//add routing configuration
 
 class App extends Component {
+  state = {title: null};
+
+  handleOnTitleChange = (e) => {
+    this.setState({
+      title: e
+    });
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <div className="App">
+          <HashRouter>
+            <div>
+              <MovieHeader subTitle={this.state.title}/>
+              <Route exact path="/" render={()=><MovieList onTitleChange={this.handleOnTitleChange} />}/>
+              <Route path="/movielist" render={()=><MovieList onTitleChange={this.handleOnTitleChange} />}/>
+              <Route path="/movie" render={()=><Movie onTitleChange={this.handleOnTitleChange}/>}/>
+            </div>
+          </HashRouter>
+        </div>
     );
   }
 }
