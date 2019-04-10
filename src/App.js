@@ -8,11 +8,11 @@ import {HashRouter,Route} from 'react-router-dom';
 //add routing configuration
 
 class App extends Component {
-  state = {title: null};
+  state = {movieId: null};
 
   handleOnTitleChange = (e) => {
     this.setState({
-      title: e
+      movieId: e
     });
   }
   render() {
@@ -20,7 +20,7 @@ class App extends Component {
         <div className="App">
           <HashRouter>
             <div>
-              <MovieHeader subTitle={this.state.title}/>
+              <MovieHeader movieId={this.state.movieId}/>
               <Route exact path="/" render={()=><MovieList onTitleChange={this.handleOnTitleChange} />}/>
               <Route path="/movielist" render={()=><MovieList onTitleChange={this.handleOnTitleChange} />}/>
               <Route path="/movie" render={()=><Movie onTitleChange={this.handleOnTitleChange}/>}/>
